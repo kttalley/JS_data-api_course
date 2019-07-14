@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name ="viewport" content = "width=device-width, initial-scale=1.0" />
+        <!-- <meta http-equiv="X-UA-Compatible" content = "ie=edge" /> -->
+        <title>Fetch and Graph CSV</title>
+    </head>
+    <body>
+       <script>
+           //data from : nasa
+        getData();
+           async function getData() {
+               const response = await fetch('nasa-data_zonal-annual-means.csv');
+               const data = await response.text();
+               console.log(data);
+
+                //split rows
+               const table = data.split('\n').slice(1); // '/n' = line break character
+                //forEach higher level function that applies to every element of an array
+               table.forEach(row => {
+                const columns = row.split(','); //split up collumns
+                const year = columns[0];
+                const temp = columns[1];
+                console.log(year, temp);
+               });
+               console.log(rows);
+           }
+
+        </script>
+    </body>
+</html>
