@@ -42,24 +42,52 @@
 
             let codeBlock = '<h1 class = "message" >'+spin+'</h1>';
             console.log('about to throw u a rainbow');
-            fetch('https://images-na.ssl-images-amazon.com/images/I/61yoTtDxuiL._SX425_.jpg')
-            .then(response => {
-                console.log('response hur');
-                return response.blob();
-            })
-            .then(blob => {
-                console.log('response2');
-                document.getElementById('rainbow').src = URL.createObjectURL(blob);
-            })
-            .then(sclDown => {
-                console.log('response3');
-                document.getElementById('rainbow').width = 200;
-                document.getElementById('rainbow').style = 'transform: rotate('+'45'+spin+'deg)';
-            })
-            .then(addMsg => {
-                console.log('last response');
+            // catchRainbow();
+
+            // or
+
+            catchRainbow()
+            .then( addMsg => {
                 document.getElementById('content').innerHTML = codeBlock;
+            })
+            .catch(error => {
+                console.log('error');
             });
+
+            //async functions can be chained with .then, .catch methods, etc.
+
+
+            async function catchRainbow() {
+                const response = await fetch('https://images-na.ssl-images-amazon.com/images/I/61yoTtDxuiL._SX425_.jpg');
+                const blob = await response.blob();
+                document.getElementById('rainbow').src = URL.createObjectURL(blob);
+
+            }
+
+
+
+            // fetch('https://images-na.ssl-images-amazon.com/images/I/61yoTtDxuiL._SX425_.jpg')
+            // .then(response => {
+            //     console.log('response hur');
+            //     return response.blob();
+            // })
+            // .then(blob => {
+            //     console.log('response2');
+            //     // document.getElementById('rainbow').src = URL.createObjectURL(blob);
+            // })
+            // .then(sclDown => {
+            //     console.log('response3');
+            //     document.getElementById('rainbow').width = 200;
+            //     document.getElementById('rainbow').style = 'transform: rotate('+'45'+spin+'deg)';
+            // })
+            // .then(addMsg => {
+            //     console.log('last response');
+            //     document.getElementById('content').innerHTML = codeBlock;
+            // })
+            // .catch(error => {
+            //     console.log("this is my own error msg");
+            //     console.error(error);
+            // });
             
         </script>
     </body>
