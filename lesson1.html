@@ -12,8 +12,35 @@
         <title>Data/APIs 1</title>
     </head>
     <body>
-        <img src = '' id = 'rainbow' />
+        <img src = '' id = 'rainbow' style = 'transform: rotate(30deg)' />
+        <div id = 'content'></div>
         <script>
+            // let timer = 0;
+            // let frame = 0;
+            // while(timer < 60){
+            //     timer = timer+1;
+            // }
+            // if(timer > 60){
+            //     frame = frame+1;
+            // };
+            // if(timer == 61){
+            //     timer = 0;
+            // };
+            
+            
+            let spin = 0.5;
+        //    if(frame < 100){
+        //         spin = spin+1;
+        //     }
+            let spinner = function(){
+                spin++;
+            }
+
+            window.setInterval(() => {
+                spinner();
+            }, 1000/ 60);
+
+            let codeBlock = '<h1 class = "message" >'+spin+'</h1>';
             console.log('about to throw u a rainbow');
             fetch('https://images-na.ssl-images-amazon.com/images/I/61yoTtDxuiL._SX425_.jpg')
             .then(response => {
@@ -23,7 +50,17 @@
             .then(blob => {
                 console.log('response2');
                 document.getElementById('rainbow').src = URL.createObjectURL(blob);
+            })
+            .then(sclDown => {
+                console.log('response3');
+                document.getElementById('rainbow').width = 200;
+                document.getElementById('rainbow').style = 'transform: rotate('+'45'+spin+'deg)';
+            })
+            .then(addMsg => {
+                console.log('last response');
+                document.getElementById('content').innerHTML = codeBlock;
             });
+            
         </script>
     </body>
 </html>
